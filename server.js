@@ -17,8 +17,9 @@ app.use (bodyParser.urlencoded( {extended : true} ) );
 app.use ('/', enterNameRoute);
 app.use ('/', displayNameRoute);
 
-scraper.scrapeAsync();
-
+scraper.scrapeAsync().then((prices) => {
+	console.log(prices)
+})
 
 app.listen(3000,function() {
     console.log("Server started");
