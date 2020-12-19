@@ -1,0 +1,45 @@
+<html>
+<head>
+  <link rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container" style="padding:20px">
+   <div class="card cardbg-light">
+    <div class="card-header">
+      <h3><btn class="btn btn-dark btn-lg">Current Silver Price: {{silverPrice}} $CA</btn></h3>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+         <tr>
+          <th scope="col">Dealers</th>
+          <th scope="col">Shipping</th>
+          <th scope="col">1oz Canadian Maple Leaf</th>
+          <th scope="col">10oz Royal Canadian Mint Bar</th>
+          <th scope="col">100 oz Royal Canadian Mint Bar</th>
+        </tr>
+      </thead>
+      <tr>
+        <td colspan="2"></td>
+        <td><img height="128" width="128" src="images/rcm1oz.jpg" /></td>
+        <td><img height="128" width="128" src="images/rcm10oz.jpg" /></td>
+        <td><img height="128" width="128" src="images/rcm100oz.png" /></td>
+      </tr>
+      {{#retailers}}
+      <tr scope="row">
+        <td><img class="dealer-img" width="300" height="70" src="{{logo_url}}" title="{{name}}" /></td>
+        <td>FREE SHIPPING</td>
+        <td>{{_1oz}}</td>
+        <td>{{_10oz}}</td>
+        <td>{{_100oz}}</td>
+      </tr>
+      {{/retailers}}
+    </table>
+  </div>
+</div>
+</div>
+</body>
+</html>
