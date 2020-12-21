@@ -17,15 +17,24 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.use('/', routes);
 
-scraper.scrapeAsync().then((data) => {
-	storage.setData(data)
+app.get('/sitemap.xml', function(request,response) {
+	response.sendFile('/public/xml/sitemap.xml', {root: __dirname});
 })
 
 
+update()
+
+setInterval(update, 60000)
+
+function update() {
+	scraper.scrapeAsync().then((data) => {
+		storage.setData(data)
+	})
+}
 
 /*data = scraper.fakeScrape()
 storage.setData(data)
 */
 app.listen(3000,function() {
-    console.log("Server started");
+	console.log("Server started");
 });
