@@ -1,5 +1,8 @@
 <html>
 <head>
+  <title>Compare Silver Prices and Premiums From Canadian Dealers, Best Physical Silver Deals in Canada</title>
+
+  <link rel="icon" href="images/illu.jpg">
   <link rel="stylesheet"
   href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
   crossorigin="anonymous">
@@ -17,8 +20,8 @@
          <tr>
           <th scope="col">Dealers</th>
           <th scope="col">Shipping</th>
-          <th scope="col">1oz Canadian Maple Leaf</th>
-          <th scope="col">10oz Royal Canadian Mint Bar</th>
+          <th scope="col">1 oz Canadian Maple Leaf</th>
+          <th scope="col">10 oz Royal Canadian Mint Bar</th>
           <th scope="col">100 oz Royal Canadian Mint Bar</th>
         </tr>
       </thead>
@@ -30,11 +33,20 @@
       </tr>
       {{#retailers}}
       <tr scope="row">
-        <td><img class="dealer-img" width="300" height="70" src="{{logo_url}}" title="{{name}}" /></td>
+        <td><a target="_blank" href="{{dealer_url}}"><img class="dealer-img" width="300" height="70" src="{{logo_url}}" title="{{name}}" /></a></td>
         <td>FREE SHIPPING</td>
-        <td>{{_1oz}}</td>
-        <td>{{_10oz}}</td>
-        <td>{{_100oz}}</td>
+        <td>
+          <div><b>{{_1oz}}</b></div>
+          <div class="ratio-text">+{{_1oz_ratio}}% over spot</div>
+        </td>
+        <td>
+          <div><b>{{_10oz}}</b></div>
+          <div class="ratio-text">+{{_10oz_ratio}}% over spot</div>
+        </td>
+        <td>
+          <div><b>{{_100oz}}</b></div>
+          <div class="ratio-text">+{{_100oz_ratio}}% over spot</div>
+        </td>
       </tr>
       {{/retailers}}
     </table>

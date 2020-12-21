@@ -17,17 +17,15 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.use('/', routes);
 
-
-/*
 scraper.scrapeAsync().then((data) => {
 	storage.setData(data)
 })
-*/
 
 
-data = scraper.fakeScrape()
+
+/*data = scraper.fakeScrape()
 storage.setData(data)
-
+*/
 app.listen(3000,function() {
     console.log("Server started");
 });

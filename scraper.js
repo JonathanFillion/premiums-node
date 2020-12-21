@@ -97,6 +97,12 @@ async function scrapeAsync(){
     priam = $(sumcon).find('.woocommerce-Price-amount')[0]
     bullionmart_100oz = cleanBullionMart($(priam).text())
 
+
+    //KITCO
+
+    //https://www.apmex.com/international
+
+
     data =  {
         silver:silver,
         retailers: [
@@ -107,8 +113,20 @@ async function scrapeAsync(){
         ]
     }
 
+    data = calculatePremiumsRatios(data)
     return data
 
+}
+
+function calculatePremiumsRatios(data){
+    for(let i = 0 ;i < data.retailers.length; i++) {
+        data.retailers[i]._1oz_ratio = ((((data.retailers[i]._1oz / data.silver) - 1) * 100) + "").substring(0, 5)
+        data.retailers[i]._10oz_ratio = ((((data.retailers[i]._10oz / (data.silver * 10)) - 1) * 100) + "").substring(0, 5)
+        data.retailers[i]._100oz_ratio = ((((data.retailers[i]._100oz / (data.silver * 100)) - 1) * 100) + "").substring(0, 5)
+        
+    }
+
+    return data
 }
 
 function fakeScrape() {
