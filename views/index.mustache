@@ -33,21 +33,48 @@
       </tr>
       {{#retailers}}
       <tr scope="row">
-        <td><a target="_blank" href="{{dealer_url}}"><img class="dealer-img" width="300" height="70" src="{{logo_url}}" title="{{name}}" /></a></td>
-        <td>FREE SHIPPING</td>
+        <td>
+          <a target="_blank" href="{{dealer_url}}"><img class="dealer-img" width="300" height="70" src="{{logo_url}}" title="{{name}}" /></a>
+        </td>
+        <td>{{shipping}}</td>
+        {{#min1oz}}
+        <td class="selected-td">
+          <div><b>{{_1oz}}</b></div>
+          <div class="ratio-text">+{{_1oz_ratio}}% over spot</div>
+        </td>
+        {{/min1oz}}
+        {{^min1oz}}
         <td>
           <div><b>{{_1oz}}</b></div>
           <div class="ratio-text">+{{_1oz_ratio}}% over spot</div>
         </td>
+        {{/min1oz}}
+        {{#min10oz}}
+        <td class="selected-td">
+          <div><b>{{_10oz}}</b></div>
+          <div class="ratio-text">+{{_10oz_ratio}}% over spot</div>
+        </td>
+        {{/min10oz}}
+        {{^min10oz}}
         <td>
           <div><b>{{_10oz}}</b></div>
           <div class="ratio-text">+{{_10oz_ratio}}% over spot</div>
         </td>
+        {{/min10oz}}
+        {{#min100oz}}
+        <td class="selected-td">
+          <div><b>{{_100oz}}</b></div>
+          <div class="ratio-text">+{{_100oz_ratio}}% over spot</div>
+        </td>
+        {{/min100oz}}
+        {{^min100oz}}
         <td>
           <div><b>{{_100oz}}</b></div>
           <div class="ratio-text">+{{_100oz_ratio}}% over spot</div>
         </td>
       </tr>
+      {{/min100oz}}
+
       {{/retailers}}
     </table>
   </div>

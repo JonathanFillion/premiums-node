@@ -17,3 +17,7 @@
 	color: green;
 	font-size: 12px;
 }
+
+.selected-td {
+	background-color: #ffe8b9;
+}

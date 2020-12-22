@@ -106,14 +106,15 @@ async function scrapeAsync(){
     data =  {
         silver:silver,
         retailers: [
-            {name: "Canada Gold", dealer_url: "https://canadagold.ca/what-we-sell/", logo_url: "images/canadagold.png", _1oz: canadagold_1oz,_10oz:canadagold_10oz, _100oz: canadagold_100oz},
-            {name: "Canadian PMX", dealer_url: "https://canadianbullion.ca", logo_url: "images/canadianpmx.png", _1oz:canadianpmx_1oz, _10oz:canadianpmx_10oz, _100oz:canadianpmx_100oz},
-            {name: "Canadian Bullion", dealer_url: "https://www.bullionmart.ca", logo_url: "images/canadianbullion.png", _1oz:canadianbullion_1oz, _10oz:canadianbullion_10oz, _100oz:canadianbullion_100oz},
-            {name: "Bullion Mart", dealer_url: "https://www.bullionmart.ca", logo_url: "images/bullionmart.png", _1oz: bullionmart_1oz, _10oz:bullionmart_10oz, _100oz:bullionmart_100oz}
+        {name: "Canada Gold", shipping:"Local Pickup Only, Multiple Locations", dealer_url: "https://canadagold.ca/what-we-sell/", logo_url: "images/canadagold.png", _1oz: canadagold_1oz,_10oz:canadagold_10oz, _100oz: canadagold_100oz},
+        {name: "Canadian PMX", shipping:"Flat Rate of $16.95", dealer_url: "https://canadianpmx.com", logo_url: "images/canadianpmx.png", _1oz:canadianpmx_1oz, _10oz:canadianpmx_10oz, _100oz:canadianpmx_100oz},
+        {name: "Canadian Bullion", shipping:"Free Shipping Over $2500", dealer_url: "https://canadianbullion.ca", logo_url: "images/canadianbullion.png", _1oz:canadianbullion_1oz, _10oz:canadianbullion_10oz, _100oz:canadianbullion_100oz},
+        {name: "Bullion Mart", shipping:"Free Shiping Over $500", dealer_url: "https://www.bullionmart.ca", logo_url: "images/bullionmart.png", _1oz: bullionmart_1oz, _10oz:bullionmart_10oz, _100oz:bullionmart_100oz}
         ]
     }
 
     data = calculatePremiumsRatios(data)
+    data = findLowestPremiums(data)
     return data
 
 }
@@ -123,20 +124,36 @@ function calculatePremiumsRatios(data){
         data.retailers[i]._1oz_ratio = ((((data.retailers[i]._1oz / data.silver) - 1) * 100) + "").substring(0, 5)
         data.retailers[i]._10oz_ratio = ((((data.retailers[i]._10oz / (data.silver * 10)) - 1) * 100) + "").substring(0, 5)
         data.retailers[i]._100oz_ratio = ((((data.retailers[i]._100oz / (data.silver * 100)) - 1) * 100) + "").substring(0, 5)
-        
     }
 
     return data
+}
+
+function findLowestPremiums(data) {
+    let array = data.retailers
+    let _1ozs = array.map(el => parseFloat(el._1oz, 10))
+    let _10ozs = array.map(el => parseFloat(el._10oz, 10))
+    let _100ozs = array.map(el => parseFloat(el._100oz, 10))
+
+    let i1oz = _1ozs.indexOf(Math.min(..._1ozs));
+    let i10oz = _10ozs.indexOf(Math.min(..._10ozs));
+    let i100oz = _100ozs.indexOf(Math.min(..._100ozs));
+
+    data.retailers[i1oz].min1oz = true
+    data.retailers[i10oz].min10oz = true
+    data.retailers[i100oz].min100oz = true
+
+    return data;
 }
 
 function fakeScrape() {
     data =  {
         silver: "35",
         retailers: [
-            {name: "Canada Gold", dealer_url: "https://canadagold.ca/what-we-sell/", logo_url: "images/canadagold.png", _1oz: "10",_10oz: "100", _100oz: "1000"},
-            {name: "Canadian PMX", dealer_url: "https://canadianbullion.ca", logo_url: "images/canadianpmx.png", _1oz: "10", _10oz: "100", _100oz: "1000"},
-            {name: "Canadian Bullion", dealer_url: "https://www.bullionmart.ca", logo_url: "images/canadianbullion.png", _1oz: "10", _10oz: "100", _100oz: "1000"},
-            {name: "Bullion Mart", dealer_url: "https://www.bullionmart.ca", logo_url: "images/bullionmart.png", _1oz: "10", _10oz: "100", _100oz: "1000"}
+        {name: "Canada Gold", dealer_url: "https://canadagold.ca/what-we-sell/", logo_url: "images/canadagold.png", _1oz: "10",_10oz: "100", _100oz: "1000"},
+        {name: "Canadian PMX", dealer_url: "https://canadianbullion.ca", logo_url: "images/canadianpmx.png", _1oz: "10", _10oz: "100", _100oz: "1000"},
+        {name: "Canadian Bullion", dealer_url: "https://www.bullionmart.ca", logo_url: "images/canadianbullion.png", _1oz: "10", _10oz: "100", _100oz: "1000"},
+        {name: "Bullion Mart", dealer_url: "https://www.bullionmart.ca", logo_url: "images/bullionmart.png", _1oz: "10", _10oz: "100", _100oz: "1000"}
         ]
     }
 
