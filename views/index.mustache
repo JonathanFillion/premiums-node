@@ -46,42 +46,53 @@
         <td>{{shipping}}</td>
         {{#min1oz}}
         <td class="selected-td">
-          <div><b>{{_1oz}}</b></div>
-          <div class="ratio-text">+{{_1oz_ratio}}% over spot</div>
+          <a class="remove-blue" target="_blank" href="{{_1oz_link}}">
+            <div><b>{{_1oz}}</b></div>
+            <div class="ratio-text">+{{_1oz_ratio}}% over spot</div>
+          </a>
         </td>
         {{/min1oz}}
         {{^min1oz}}
         <td>
-          <div><b>{{_1oz}}</b></div>
-          <div class="ratio-text">+{{_1oz_ratio}}% over spot</div>
+          <a target="_blank" href="{{_1oz_link}}">
+            <div><b>{{_1oz}}</b></div>
+            <div class="ratio-text">+{{_1oz_ratio}}% over spot</div>
+          </a>
         </td>
         {{/min1oz}}
         {{#min10oz}}
         <td class="selected-td">
-          <div><b>{{_10oz}}</b></div>
-          <div class="ratio-text">+{{_10oz_ratio}}% over spot</div>
+          <a target="_blank" href="{{_10oz_link}}">
+            <div><b>{{_10oz}}</b></div>
+            <div class="ratio-text">+{{_10oz_ratio}}% over spot</div>
+          </a>
         </td>
         {{/min10oz}}
         {{^min10oz}}
         <td>
-          <div><b>{{_10oz}}</b></div>
-          <div class="ratio-text">+{{_10oz_ratio}}% over spot</div>
+          <a target="_blank" href="{{_10oz_link}}">
+            <div><b>{{_10oz}}</b></div>
+            <div class="ratio-text">+{{_10oz_ratio}}% over spot</div>
+          </a>
         </td>
         {{/min10oz}}
         {{#min100oz}}
         <td class="selected-td">
-          <div><b>{{_100oz}}</b></div>
-          <div class="ratio-text">+{{_100oz_ratio}}% over spot</div>
+          <a target="_blank" href="{{_100oz_link}}">
+            <div><b>{{_100oz}}</b></div>
+            <div class="ratio-text">+{{_100oz_ratio}}% over spot</div>
+          </a>
         </td>
         {{/min100oz}}
         {{^min100oz}}
         <td>
-          <div><b>{{_100oz}}</b></div>
-          <div class="ratio-text">+{{_100oz_ratio}}% over spot</div>
+          <a target="_blank" href="{{_100oz_link}}">
+            <div><b>{{_100oz}}</b></div>
+            <div class="ratio-text">+{{_100oz_ratio}}% over spot</div>
+          </a>
         </td>
       </tr>
       {{/min100oz}}
-
       {{/retailers}}
     </table>
   </div>

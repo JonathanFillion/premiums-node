@@ -21,3 +21,5 @@
 .selected-td {
 	background-color: #ffe8b9;
 }
+
+a { color: inherit; } 

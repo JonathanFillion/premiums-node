@@ -123,6 +123,15 @@ async function scrapeAsync(){
 
 
     //KITCO
+    url = "https://online.kitco.com/buy/3104/1-oz-Silver-Canadian-Maple-Leaf-Coin-9999-3104"
+    response = await fetch(url, { headers:{'cookie': "currencyId=CAD;"}})
+    body = await response.text();
+    $ = cheerio.load(body)
+    table = $('.bulk_discount_list')[0]
+    tbody = $(table).find('tbody')[0]
+    tr = $(tbody).find('tr')[1]
+    td = $(tr).find('td')[1]
+    kitco_1oz = cleanKitco($(td).text())
 
     url = "https://online.kitco.com/buy/1040/10-oz-Silver-RCM-Bar-9999-1040"
     response = await fetch(url, { headers:{'cookie': "currencyId=CAD;"}})
@@ -178,11 +187,66 @@ async function scrapeAsync(){
         silver:silver,
         retailers: [
         //{name: "Canada Gold", shipping:"Local Pickup Only, Multiple Locations", dealer_url: "https://canadagold.ca/what-we-sell/", logo_url: "images/canadagold.png", _1oz: canadagold_1oz,_10oz:canadagold_10oz, _100oz: canadagold_100oz},
-        {name: "Canadian PMX", shipping:"Flat Rate of $16.95", dealer_url: "https://canadianpmx.com", logo_url: "images/canadianpmx.png", _1oz:canadianpmx_1oz, _10oz:canadianpmx_10oz, _100oz:canadianpmx_100oz},
-        {name: "Canadian Bullion", shipping:"Free Shipping over $2500", dealer_url: "https://canadianbullion.ca", logo_url: "images/canadianbullion.png", _1oz:canadianbullion_1oz, _10oz:canadianbullion_10oz, _100oz:canadianbullion_100oz},
-        {name: "Bullion Mart", shipping:"Free Shipping over $500", dealer_url: "https://www.bullionmart.ca", logo_url: "images/bullionmart.png", _1oz: bullionmart_1oz, _10oz:bullionmart_10oz, _100oz:bullionmart_100oz},
-        {name: "Kitco", shipping:"Ships to Canada", dealer_url: "https://online.kitco.com", logo_url: "images/kitco.png", _1oz: 0, _10oz: kitco_10oz, _100oz: kitco_100oz},
-        {name: "Apmex", shipping:"Free Shipping over $US 100", dealer_url: "https://www.apmex.com", logo_url: "images/apmex.png", _1oz: apmex_1oz, _10oz: apmex_10oz, _100oz: apmex_100oz}
+        {
+            name: "Canadian PMX", 
+            shipping:"Flat Rate of $16.95", 
+            dealer_url: "https://canadianpmx.com", 
+            logo_url: "images/canadianpmx.png",
+            _1oz_link: "https://canadianpmx.com/product/2020-canadian-silver-maple-leaf-1-oz-9999/",
+            _10oz_link: "https://canadianpmx.com/product/silver-bar-10-oz-royal-canadian-mint-9999/",
+            _100oz_link: "https://canadianpmx.com/product/silver-bar-100-oz-royal-canadian-mint-9999/", 
+            _1oz:canadianpmx_1oz, 
+            _10oz:canadianpmx_10oz, 
+            _100oz:canadianpmx_100oz
+        },
+        {
+            name: "Canadian Bullion", 
+            shipping:"Free Shipping over $2500", 
+            dealer_url: "https://canadianbullion.ca", 
+            logo_url: "images/canadianbullion.png",
+            _1oz_link: "https://canadianbullion.ca/silver/coins/1-oz-2016-canadian-maple-leaf-silver-coin.html",
+            _10oz_link: "https://canadianbullion.ca/silver/10-oz-silver-bar/10-oz-royal-canadian-mint-silver-wafer-bar.html",
+            _100oz_link: "https://canadianbullion.ca/silver/100-oz-silver-bar/100-oz-rcm-royal-canadian-mint-silver-bar.html", 
+            _1oz:canadianbullion_1oz, 
+            _10oz:canadianbullion_10oz, 
+            _100oz:canadianbullion_100oz
+        },
+        {
+            name: "Bullion Mart", 
+            shipping:"Free Shipping over $500", 
+            dealer_url: "https://www.bullionmart.ca", 
+            logo_url: "images/bullionmart.png",
+            _1oz_link: "https://www.bullionmart.ca/product/2020-1-oz-99-99-pure-silver-maple-leaf-bullion-coin/",
+            _10oz_link: "https://www.bullionmart.ca/product/10-oz-rcm-silver-bar-new-low-serial-numbers/",
+            _100oz_link: "https://www.bullionmart.ca/product/silver-bar-100-oz-royal-canadian-mint-9999-new/", 
+            _1oz: bullionmart_1oz, 
+            _10oz:bullionmart_10oz, 
+            _100oz:bullionmart_100oz
+        },
+        {
+            name: "Kitco", 
+            shipping:"Ships to Canada", 
+            dealer_url: "https://online.kitco.com", 
+            logo_url: "images/kitco.png",
+            _1oz_link: "https://online.kitco.com/buy/3104/1-oz-Silver-Canadian-Maple-Leaf-Coin-9999-3104",
+            _10oz_link: "https://online.kitco.com/buy/1040/10-oz-Silver-RCM-Bar-9999-1040",
+            _100oz_link: "https://online.kitco.com/buy/100710/100-oz-Silver-Royal-Canadian-Mint-Bar-9999-100710",
+            _1oz: kitco_1oz, 
+            _10oz: kitco_10oz, 
+            _100oz: kitco_100oz
+        },
+        {
+            name: "Apmex", 
+            shipping:"Free Shipping over $US 100", 
+            dealer_url: "https://www.apmex.com", 
+            logo_url: "images/apmex.png",
+            _1oz_link: "https://www.apmex.com/product/1090/1-oz-canadian-silver-maple-leaf-coin-bu-random-year",
+            _10oz_link: "https://www.apmex.com/product/83022/10-oz-silver-bar-royal-canadian-mint-9999-fine-new-style",
+            _100oz_link: "https://www.apmex.com/product/97758/100-oz-silver-bar-royal-canadian-mint-9999-fine-pressed",
+            _1oz: apmex_1oz, 
+            _10oz: apmex_10oz, 
+            _100oz: apmex_100oz
+        }
         ]
     }
 
