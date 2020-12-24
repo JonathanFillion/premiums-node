@@ -14,14 +14,12 @@
     <div class="card-header">
       <h3><btn class="btn btn-dark btn-lg">Current Silver Price: {{silverPrice}} $CA</btn></h3>
     </div>
-    <div class="card">
-      <div class="card-body">
-        <h6>
-          Compare Silver Prices Canada maintains a list of the best silver dealers serving the Canadian region. Find the lowest silver premiums at all time.
-        </h6> 
-      </div>
-    </div>
+
     <div class="card-body">
+      <p>
+        Compare Silver Prices Canada maintains a list of the best silver dealers serving the Canadian region. Find the lowest silver premiums at all time.
+      </p>
+      <p><h6>Royal Canadian Mint</h6></p>
       <table class="table table-bordered">
         <thead class="thead-dark">
          <tr>
@@ -38,7 +36,7 @@
         <td><img height="128" width="128" src="images/rcm10oz.jpg" /></td>
         <td><img height="128" width="128" src="images/rcm100oz.png" /></td>
       </tr>
-      {{#retailers}}
+      {{#rcm_retailers}}
       <tr scope="row">
         <td>
           <a target="_blank" href="{{dealer_url}}"><img class="dealer-img" width="300" height="70" src="{{logo_url}}" title="{{name}}" /></a>
@@ -93,7 +91,7 @@
         </td>
       </tr>
       {{/min100oz}}
-      {{/retailers}}
+      {{/rcm_retailers}}
     </table>
   </div>
 </div>

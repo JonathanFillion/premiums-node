@@ -24,6 +24,9 @@ async function scrapeAsync(){
     p = $(div).find('p')[1]
     silver = $(p).text()
     
+
+    //RCM
+
     //CANADAGOLD
 
     url = 'https://canadagold.ca/what-we-sell/'
@@ -157,35 +160,49 @@ async function scrapeAsync(){
     //APMEX
 
     url = "https://www.apmex.com/product/1090/1-oz-canadian-silver-maple-leaf-coin-bu-random-year"
-    response = await fetch(url, { headers:{'cookie': "a.c=ipp=80; a.r=rvp=1090;"}})
+    response = await fetch(url)
     body = await response.text();
     $ = cheerio.load(body)
     p = $('.price')[4]
     apmex_1oz =  convertToCad(cleanApmex($(p).text()), usdcad)
 
     url = "https://www.apmex.com/product/83022/10-oz-silver-bar-royal-canadian-mint-9999-fine-new-style"
-    response = await fetch(url, { headers:{'cookie': "a.c=ipp=80; a.r=rvp=1090;"}})
+    response = await fetch(url)
     body = await response.text();
     $ = cheerio.load(body)
     p = $('.price')[4]
     apmex_10oz =  convertToCad(cleanApmex($(p).text()), usdcad)
 
     url = "https://www.apmex.com/product/97758/100-oz-silver-bar-royal-canadian-mint-9999-fine-pressed"
-    response = await fetch(url, { headers:{'cookie': "a.c=ipp=80; a.r=rvp=1090;"}})
+    response = await fetch(url)
     body = await response.text();
     $ = cheerio.load(body)
     p = $('.price')[4]
     apmex_100oz = convertToCad(cleanApmex($(p).text()), usdcad)
 
 
-    //https://cbmint.com/shipping
-    //https://sdbullion.com/sd-bullion-shipping-policies
-    //https://www.goldenstatemint.com/faq/Shipping
-    //silvergoldbull api
+    //CBMINT
+
+
+    url = "https://cbmint.com/royal-canadian-mint-100-ounce-silver-bar"
+    response = await fetch(url)
+    body = await response.text();
+    $ = cheerio.load(body)
+ 
+
+    //SDBULLION
+
+    //GOLDENSTATEMINT
+
+    //GOLDSILVER
+
+    //SILVERGOLDBULL
+
+
 
     data =  {
         silver:silver,
-        retailers: [
+        rcm_retailers: [
         //{name: "Canada Gold", shipping:"Local Pickup Only, Multiple Locations", dealer_url: "https://canadagold.ca/what-we-sell/", logo_url: "images/canadagold.png", _1oz: canadagold_1oz,_10oz:canadagold_10oz, _100oz: canadagold_100oz},
         {
             name: "Canadian PMX", 
@@ -257,17 +274,17 @@ async function scrapeAsync(){
 }
 
 function calculatePremiumsRatios(data){
-    for(let i = 0 ;i < data.retailers.length; i++) {
-        data.retailers[i]._1oz_ratio = data.retailers[i]._1oz ? ((((data.retailers[i]._1oz / data.silver) - 1) * 100)).toFixed(2) : 0
-        data.retailers[i]._10oz_ratio = data.retailers[i]._10oz ? ((((data.retailers[i]._10oz / (data.silver * 10)) - 1) * 100)).toFixed(2) : 0
-        data.retailers[i]._100oz_ratio = data.retailers[i]._100oz ? ((((data.retailers[i]._100oz / (data.silver * 100)) - 1) * 100)).toFixed(2) : 0
+    for(let i = 0 ;i < data.rcm_retailers.length; i++) {
+        data.rcm_retailers[i]._1oz_ratio = data.rcm_retailers[i]._1oz ? ((((data.rcm_retailers[i]._1oz / data.silver) - 1) * 100)).toFixed(2) : 0
+        data.rcm_retailers[i]._10oz_ratio = data.rcm_retailers[i]._10oz ? ((((data.rcm_retailers[i]._10oz / (data.silver * 10)) - 1) * 100)).toFixed(2) : 0
+        data.rcm_retailers[i]._100oz_ratio = data.rcm_retailers[i]._100oz ? ((((data.rcm_retailers[i]._100oz / (data.silver * 100)) - 1) * 100)).toFixed(2) : 0
     }
 
     return data
 }
 
 function findLowestPremiums(data) {
-    let array = data.retailers
+    let array = data.rcm_retailers
     let _1ozs = array.map(el => { if(el._1oz){ return  parseFloat(el._1oz, 10) } else { return 1000000}})
     let _10ozs = array.map(el => {if(el._10oz){ return  parseFloat(el._10oz, 10)} else {return 1000000}})
     let _100ozs = array.map(el => {if(el._100oz){ return  parseFloat(el._100oz, 10)} else {return 1000000}})
@@ -276,9 +293,9 @@ function findLowestPremiums(data) {
     let i10oz = _10ozs.indexOf(Math.min(..._10ozs));
     let i100oz = _100ozs.indexOf(Math.min(..._100ozs));
 
-    data.retailers[i1oz].min1oz = true
-    data.retailers[i10oz].min10oz = true
-    data.retailers[i100oz].min100oz = true
+    data.rcm_retailers[i1oz].min1oz = true
+    data.rcm_retailers[i10oz].min10oz = true
+    data.rcm_retailers[i100oz].min100oz = true
 
     return data;
 }
