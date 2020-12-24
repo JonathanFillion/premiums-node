@@ -85,7 +85,7 @@ async function scrapeAsync(){
     pri = $(regpri).find('.price')[0]
     canadianbullion_10oz = cleanCanadianBullion($(pri).text())
 
-    url = "https://canadianbullion.ca/silver/100-oz-silver-bar/100-oz-sunshine-mint-silver-bar.html"
+    url = "https://canadianbullion.ca/silver/100-oz-silver-bar/100-oz-rcm-royal-canadian-mint-silver-bar.html"
     response = await fetch(url)
     body = await response.text();
     $ = cheerio.load(body)
@@ -169,10 +169,15 @@ async function scrapeAsync(){
     apmex_100oz = convertToCad(cleanApmex($(p).text()), usdcad)
 
 
+    //https://cbmint.com/shipping
+    //https://sdbullion.com/sd-bullion-shipping-policies
+    //https://www.goldenstatemint.com/faq/Shipping
+    //silvergoldbull api
+
     data =  {
         silver:silver,
         retailers: [
-        {name: "Canada Gold", shipping:"Local Pickup Only, Multiple Locations", dealer_url: "https://canadagold.ca/what-we-sell/", logo_url: "images/canadagold.png", _1oz: canadagold_1oz,_10oz:canadagold_10oz, _100oz: canadagold_100oz},
+        //{name: "Canada Gold", shipping:"Local Pickup Only, Multiple Locations", dealer_url: "https://canadagold.ca/what-we-sell/", logo_url: "images/canadagold.png", _1oz: canadagold_1oz,_10oz:canadagold_10oz, _100oz: canadagold_100oz},
         {name: "Canadian PMX", shipping:"Flat Rate of $16.95", dealer_url: "https://canadianpmx.com", logo_url: "images/canadianpmx.png", _1oz:canadianpmx_1oz, _10oz:canadianpmx_10oz, _100oz:canadianpmx_100oz},
         {name: "Canadian Bullion", shipping:"Free Shipping over $2500", dealer_url: "https://canadianbullion.ca", logo_url: "images/canadianbullion.png", _1oz:canadianbullion_1oz, _10oz:canadianbullion_10oz, _100oz:canadianbullion_100oz},
         {name: "Bullion Mart", shipping:"Free Shipping over $500", dealer_url: "https://www.bullionmart.ca", logo_url: "images/bullionmart.png", _1oz: bullionmart_1oz, _10oz:bullionmart_10oz, _100oz:bullionmart_100oz},
