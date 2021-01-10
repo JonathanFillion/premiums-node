@@ -22,18 +22,20 @@ app.get('/sitemap.xml', function(request,response) {
 })
 
 
-update()
+//update()
+data = scraper.fakeScrape()
+storage.setData(data)
+//setInterval(update, 60000)
 
-setInterval(update, 60000)
-
-function update() {
+/*function update() {
 	scraper.scrapeAsync().then((data) => {
 		storage.setData(data)
 	})
 }
+*/
 
-/*data = scraper.fakeScrape()
-storage.setData(data)
+
+/*
 */
 app.listen(3000,function() {
 	console.log("Server started");
