@@ -3,6 +3,80 @@ const cheerio = require('cheerio')
 
 const fetch = require('node-fetch');
 
+
+
+
+async function fakeScrape() {
+        data =  {
+        silver:30,
+        rcm_retailers: [
+        {
+            name: "Canadian PMX", 
+            shipping:"Flat Rate of $16.95", 
+            dealer_url: "https://canadianpmx.com", 
+            logo_url: "images/canadianpmx.png",
+            _1oz_link: "https://canadianpmx.com/product/2020-canadian-silver-maple-leaf-1-oz-9999/",
+            _10oz_link: "https://canadianpmx.com/product/silver-bar-10-oz-royal-canadian-mint-9999/",
+            _100oz_link: "https://canadianpmx.com/product/silver-bar-100-oz-royal-canadian-mint-9999/", 
+            _1oz: 100, 
+            _10oz: 200, 
+            _100oz: 300
+        },
+        {
+            name: "Canadian Bullion", 
+            shipping:"Free Shipping over $2500", 
+            dealer_url: "https://canadianbullion.ca", 
+            logo_url: "images/canadianbullion.png",
+            _1oz_link: "https://canadianbullion.ca/silver/coins/1-oz-2016-canadian-maple-leaf-silver-coin.html",
+            _10oz_link: "https://canadianbullion.ca/silver/10-oz-silver-bar/10-oz-royal-canadian-mint-silver-wafer-bar.html",
+            _100oz_link: "https://canadianbullion.ca/silver/100-oz-silver-bar/100-oz-rcm-royal-canadian-mint-silver-bar.html", 
+            _1oz: 100, 
+            _10oz: 200, 
+            _100oz: 300
+        },
+        {
+            name: "Bullion Mart", 
+            shipping:"Free Shipping over $500", 
+            dealer_url: "https://www.bullionmart.ca", 
+            logo_url: "images/bullionmart.png",
+            _1oz_link: "https://www.bullionmart.ca/product/2020-1-oz-99-99-pure-silver-maple-leaf-bullion-coin/",
+            _10oz_link: "https://www.bullionmart.ca/product/10-oz-rcm-silver-bar-new-low-serial-numbers/",
+            _100oz_link: "https://www.bullionmart.ca/product/silver-bar-100-oz-royal-canadian-mint-9999-new/", 
+            _1oz: 100, 
+            _10oz: 200, 
+            _100oz: 300
+        },
+        {
+            name: "Kitco", 
+            shipping:"Ships to Canada", 
+            dealer_url: "https://online.kitco.com", 
+            logo_url: "images/kitco.png",
+            _1oz_link: "https://online.kitco.com/buy/3104/1-oz-Silver-Canadian-Maple-Leaf-Coin-9999-3104",
+            _10oz_link: "https://online.kitco.com/buy/1040/10-oz-Silver-RCM-Bar-9999-1040",
+            _100oz_link: "https://online.kitco.com/buy/100710/100-oz-Silver-Royal-Canadian-Mint-Bar-9999-100710",
+            _1oz: 100, 
+            _10oz: 200, 
+            _100oz: 300
+        },
+        {
+            name: "Apmex", 
+            shipping:"Free Shipping over $US 100", 
+            dealer_url: "https://www.apmex.com", 
+            logo_url: "images/apmex.png",
+            _1oz_link: "https://www.apmex.com/product/1090/1-oz-canadian-silver-maple-leaf-coin-bu-random-year",
+            _10oz_link: "https://www.apmex.com/product/83022/10-oz-silver-bar-royal-canadian-mint-9999-fine-new-style",
+            _100oz_link: "https://www.apmex.com/product/97758/100-oz-silver-bar-royal-canadian-mint-9999-fine-pressed",
+            _1oz: 100, 
+            _10oz: 200, 
+            _100oz: 300
+        }
+        ]
+    }
+
+    return data
+}
+
+
 async function scrapeAsync(){
 
     //USDCAD
@@ -183,12 +257,11 @@ async function scrapeAsync(){
 
     //CBMINT
 
-
     url = "https://cbmint.com/royal-canadian-mint-100-ounce-silver-bar"
     response = await fetch(url)
     body = await response.text();
     $ = cheerio.load(body)
- 
+    cbmint_100oz = ""
 
     //SDBULLION
 
