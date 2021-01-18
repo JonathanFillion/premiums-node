@@ -88,6 +88,7 @@ async function scrapeAsync(){
     yahooprice = $("span[data-reactid='32']")[0]
     usdcad = $(yahooprice).text()
 
+
     //SILVER
 
     url = 'https://www.kitco.com/silver-price-today-canada/index.html'
@@ -119,6 +120,8 @@ async function scrapeAsync(){
     tr = $(table).find('tr')[5]
     td = $(tr).find('td')[2]
     canadagold_100oz = cleanCanadaGold($(td).text())
+
+
 
     //CANADIANPMX
 
@@ -198,7 +201,6 @@ async function scrapeAsync(){
     priam = $(sumcon).find('.woocommerce-Price-amount')[0]
     bullionmart_100oz = cleanBullionMart($(priam).text())
 
-
     //KITCO
     url = "https://online.kitco.com/buy/3104/1-oz-Silver-Canadian-Maple-Leaf-Coin-9999-3104"
     response = await fetch(url, { headers:{'cookie': "currencyId=CAD;"}})
@@ -231,6 +233,7 @@ async function scrapeAsync(){
     td = $(tr).find('td')[1]
     kitco_100oz = cleanKitco($(td).text())
 
+
     //APMEX
 
     url = "https://www.apmex.com/product/1090/1-oz-canadian-silver-maple-leaf-coin-bu-random-year"
@@ -254,14 +257,13 @@ async function scrapeAsync(){
     p = $('.price')[4]
     apmex_100oz = convertToCad(cleanApmex($(p).text()), usdcad)
 
-
     //CBMINT
 
-    url = "https://cbmint.com/royal-canadian-mint-100-ounce-silver-bar"
+/*    url = "https://cbmint.com/royal-canadian-mint-100-ounce-silver-bar"
     response = await fetch(url)
     body = await response.text();
     $ = cheerio.load(body)
-    cbmint_100oz = ""
+    cbmint_100oz = ""*/
 
     //SDBULLION
 
